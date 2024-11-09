@@ -9,5 +9,5 @@ public class ZooManagement {
     }
 
     Animal lion = new Animal("felines", "lion", 14, true);
-    Zoo myZoo = new Zoo("My Awesome Zoo", "Tunis", 0);
+    Zoo myZoo = new Zoo("My Awesome Zoo", "Tunis");
 }

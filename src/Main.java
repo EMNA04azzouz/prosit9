@@ -1,57 +1,97 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Animal lion = new Animal();
+        lion.setName("Simba");
+        try {
+            lion.setAge(8);
+        } catch (InvalidAgeException e) {
+            System.out.println(e.getMessage());
+        }
+        lion.setFamily("Cats");
+        lion.setMammal(true);
 
-           /* ZooManagement zm = new ZooManagement();
+        Zoo myZoo = new Zoo("Wildlife Park", "Ariana");
+        Zoo notMyZoo = new Zoo("WaterPark", "Siliana");
 
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Insert the number of cages");
-
-            int numberOfCages = sc.nextInt();
-
-            System.out.println("Insert the name of the zoo");
-
-            String nameOfZoo = sc.next();
-
-            zm.nbrCages = numberOfCages;
-            zm.zooName = nameOfZoo;
-
-            zm.displayInformation();*/
-        Animal lion = new Animal("felines", "lion", -1, true);
-        System.out.println("Animal: " + lion.getName() + ", Family: " + lion.getFamily() +
-                ", Age: " + lion.getAge() + ", Is Mammal: " + lion.isMammal());
-        Zoo myZoo = new Zoo("My Awesome Zoo", "Tunis", 0);
-        System.out.println("Name :" + myZoo.getName() + ", city: " + myZoo.getCity() +
-                ", nbrAnimals: " + myZoo.getNbrAnimals());
-
-        Zoo notMyZoo = new Zoo("WaterPark", "Siliana" ,4);
-        System.out.println("Name :" + notMyZoo.getName() + ", city: " + notMyZoo.getCity() + ", nbrAnimals: " + myZoo.getNbrAnimals());
 
         Animal dog = new Animal("Canine", "Snoopy", 2, true);
-        System.out.println("Animal: " + dog.getName() + ", Family: " + dog.getFamily() +
-                ", Age: " + dog.getAge() + ", Is Mammal: " + dog.isMammal());
-        System.out.println(myZoo.addAnimal(lion));
-        System.out.println(myZoo.addAnimal(dog));
-        Zoo notMyZoo1 = Zoo.comparerZoo(myZoo, notMyZoo);
-        System.out.println(notMyZoo1);
-
-        System.out.println("-------------------------------------------------------");
-        Aquatic aquatic = new Aquatic("Fish", "Sardine", 2, true, "Sea");
-        Terrestrial terrestrial = new Terrestrial("Panda", "Narla", 4, true, 2);
-        Dolphin dolphin = new Dolphin("Delphinidae", "Flipper", 5, true, "Ocean", 14.5f);
-        Penguin penguin = new Penguin("Spheniscidae", "Skipper", 3, true, "Ocean", 25.3f);
 
 
-        System.out.println(aquatic);
-        System.out.println(terrestrial);
-        System.out.println(dolphin);
-        System.out.println(penguin);
+        try {
+            myZoo.addAnimal(lion);
+        } catch (ZooFullException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println(myZoo.getName() + " contient " + myZoo.getNbrAnimals() + " animaux");
+        }
+        try {
+            myZoo.addAnimal(dog);
+        } catch (ZooFullException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println(myZoo.getName() + " contient " + myZoo.getNbrAnimals() + " animaux");
+        }
+
+        myZoo.displayAnimals();
+
+        System.out.println(myZoo.searchAnimal(dog));
+        Animal dog2 = new Animal("Canine", "lll", 2, true);
+        System.out.println(myZoo.searchAnimal(dog2));
+
+//           System.out.println(myZoo.removeAnimal(dog));
+        myZoo.displayAnimals();
 
 
+        System.out.println(myZoo);
 
-        aquatic.swim();
-        dolphin.swim();
-        penguin.swim();
+        try {
+            myZoo.addAnimal(lion);
+        } catch (ZooFullException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            System.out.println(myZoo.getName() + " contient " + myZoo.getNbrAnimals() + " animaux");
+        }
+
+        myZoo.displayAnimals();
+
+        Dolphin d = new Dolphin();
+        d.setSwimmingSpeed(24.5f);
+        Dolphin d1 = new Dolphin();
+        d1.setSwimmingSpeed(21.8f);
+        Dolphin d2 = new Dolphin();
+        d2.setSwimmingSpeed(20.3f);
+        Dolphin d3 = new Dolphin();
+        d3.setSwimmingSpeed(22.6f);
+
+
+        myZoo.addAquaticAnimal(d);
+        myZoo.addAquaticAnimal(d1);
+        myZoo.addAquaticAnimal(d2);
+        myZoo.addAquaticAnimal(d3);
+        Penguin p = new Penguin();
+        p.setSwimmingDepth(24.6f);
+        Penguin p1 = new Penguin();
+        p1.setSwimmingDepth(29.6f);
+        Penguin p2 = new Penguin();
+        p2.setSwimmingDepth(219.6f);
+        Penguin p3 = new Penguin();
+        p1.setSwimmingDepth(2.6f);
+        myZoo.addAquaticAnimal(p);
+        myZoo.addAquaticAnimal(p1);
+        myZoo.addAquaticAnimal(p2);
+        myZoo.addAquaticAnimal(p3);
+        myZoo.addAquaticAnimal(new Penguin());
+
+        for (int i = 0; i < myZoo.getNbrAquaticAnimals(); i++) {
+            Aquatic[] aquatics = myZoo.getAquaticAnimals();
+            aquatics[i].swim();
+        }
+
+        myZoo.displayNumberOfAquaticsByType();
+
+        System.out.println(myZoo.maxPenguinSwimmingDepth());
+
     }
 }
