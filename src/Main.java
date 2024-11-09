@@ -17,8 +17,19 @@ public class Main {
 
 
         Animal dog = new Animal("Canine", "Snoopy", 2, true);
+        Aquatic aquatic = new Aquatic();
+        Terrestrial terrestrial = new Terrestrial() {
+            @Override
+            public void eatPlantAndMeet(Food food) {
 
-
+            }
+        };
+        System.out.println("Testing Aquatic:");
+        aquatic.eatMeat(Food.MEAT);
+        System.out.println("\nTesting Terrestrial:");
+        terrestrial.eatMeat(Food.MEAT);
+        terrestrial.eatPlant(Food.PLANT);
+        terrestrial.eatPlantAndMeat(Food.BOTH);
         try {
             myZoo.addAnimal(lion);
         } catch (ZooFullException e) {
